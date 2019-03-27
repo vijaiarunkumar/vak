@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,8 +59,8 @@ public class Main_Hack implements Comparable<Main_Hack>
 		// test(strings);
 
 		// converDatetoString(new Date());
-		// new
-		// Main_Hack().getRepeatTempleate("C:\\Users\\va87348\\Desktop\\template.txt","C:\\Users\\va87348\\Desktop\\control.ctl","C:\\Users\\va87348\\Desktop\\out.sql",false);
+		 new
+		 Main_Hack().getRepeatTempleate("C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\template.sql","C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\control.ctl","C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\out.sql",false);
 
 		// String data = "Bussiness Unit [BAU-NAM-US-GCB-CARDS] could not be
 		// deleted as it is a member in one or more Hierarchies, assigned
@@ -92,40 +93,113 @@ public class Main_Hack implements Comparable<Main_Hack>
 		 * System.out.println(audits[i]); }
 		 */
 
-		int[] sco =
-		{ 100, 90, 90, 80, 75, 60 };
-		int[] al =
-		{ 50, 65, 77, 90, 102 };
-		climbingLeaderboards(sco, al);
+		/*
+		 * int[] sco = { 100, 100, 50, 40, 40, 20, 10 }; int[] alice = { 5, 25,
+		 * 50, 120 }; climbingLeaderboards(sco, alice); for (int j =
+		 * alice.length - 1; j >= 0; j--) { System.out.println(alice[j]); }
+		 */
+
+		/*
+		 * long out = repeatedString("aab", 882787);
+		 * 
+		 * System.out.println("mon :: " + 882787 % 3);
+		 * 
+		 * System.out.println("OUT  :: " + out);
+		 */
+		/*
+		 * System.out.println(System.getProperty("line.separator"));
+		 * 
+		 * String data = "sdsd " + System.getProperty("line.separator") +
+		 * "sdsdsd sd sd";
+		 * 
+		 * System.out.println(data);
+		 */
+
+		//System.out.println('j' + 'a');
+		//covertBina();
+		
+		System.out.println(convertStringtoFormtDateStr("03/18/2019"));
+
+	}
+
+	static private String convertStringtoFormtDateStr(String s)
+	{
+		 
+		DateFormat pd = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		Date d = null;
+		String convDate = null;
+		try
+		{
+			d = pd.parse(s);
+			convDate = df.format(d);
+		} catch (ParseException e)
+		{
+			 e.printStackTrace();
+
+		}
+		return convDate;
+	}
+
+	public static void covertBina()
+	{
+		int n, count = 0, a;
+		String x = "";
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter any decimal number:");
+		n = s.nextInt();
+		while (n > 0)
+		{
+			a = n % 2;
+			if (a == 1)
+			{
+				count++;
+			}
+			x = x + "" + a;
+			n = n / 2;
+		}
+		System.out.println("Binary number:" + x);
+		System.out.println("No. of 1s:" + count);
+	}
+
+	static long repeatedString(String s, long n)
+	{
+
+		int ocrOfA = ((s.length() - s.replace("a", "").length()));
+
+		long out = (n / s.length()) * ocrOfA;
+
+		s = s.substring(0, (int) (n % s.length()));
+
+		out += ((s.length() - s.replace("a", "").length()));
+
+		return out;
 
 	}
 
 	static int[] climbingLeaderboards(int[] scores, int[] alice)
 	{
-		int rank = 1;
-		int i = 0;
-		for (int j = alice.length - 1; j >= 0; j--)
-		{
-			boolean isSame = false;
-			for (; i < scores.length; i++)
-			{
-				if (scores[i] < alice[j])
-				{
-					alice[j] = (rank);
-					rank++;
-					i--;
-					break;
-				} else if (scores[i] == alice[j])
-				{
-					if (!isSame)
-						alice[j] = rank;
-					isSame = true;
-				} else
-				{
-					rank++;
-				}
 
+		scores = Arrays.stream(scores).distinct().toArray();
+		int i = scores.length - 1;
+		for (int j = 0; j < alice.length; j++)
+		{
+			int aliceScore = alice[j];
+			alice[j] = 0;
+			for (; i >= 0; i--)
+			{
+				if (scores[i] > aliceScore)
+				{
+					alice[j] = i + 2;
+					break;
+				} else if (scores[i] == aliceScore)
+				{
+					alice[j] = i + 1;
+					break;
+				}
 			}
+			if (alice[j] == 0)
+				alice[j] = i + 2;
 		}
 
 		return null;
@@ -182,7 +256,7 @@ public class Main_Hack implements Comparable<Main_Hack>
 	{
 		if (focusName != null && focusName != "")
 		{
-			String regex = "[\\w_$&~`!%^&*|+={}:;\"\\\\?\\[\\].//(),‘\\-'\\s\\r\\t$#@\u4E00-\u9FFF\u3040-\u30ff\uac00-\ud7af]+$";
+			String regex = "[\\w_$&~`!%^&*|+={}:;\"\\\\?\\[\\].//(),â€˜\\-'\\s\\r\\t$#@\u4E00-\u9FFF\u3040-\u30ff\uac00-\ud7af]+$";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(focusName);
 			return (!matcher.matches());
@@ -219,7 +293,6 @@ public class Main_Hack implements Comparable<Main_Hack>
 			if (isCompination)
 				return processDataCompination(template, controlList, outputPath);
 			else
-
 				return processData(template, controlList, outputPath, dataSize);
 
 		} catch (FileNotFoundException e)
@@ -380,11 +453,11 @@ public class Main_Hack implements Comparable<Main_Hack>
 				Scanner scan = new Scanner(this.file);
 				while (scan.hasNext())
 				{
-					String[] strArr = scan.nextLine().split(" ");
+					String[] strArr = scan.nextLine().split("####!!");
 					if (strArr.length <= this.position)
 						dataHolder.add(null);
 					else
-						dataHolder.add(strArr[this.position]);
+						dataHolder.add(strArr[this.position].trim());
 				}
 
 			} catch (FileNotFoundException e)
