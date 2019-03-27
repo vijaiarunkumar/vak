@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +22,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main_Hack implements Comparable<Main_Hack>
 {
@@ -27,10 +31,238 @@ public class Main_Hack implements Comparable<Main_Hack>
 	{
 		// roleStepSQLGen();
 
-		new Main_Hack().getRepeatTempleate("C:\\Users\\va87348\\Desktop\\tmplate.sql", "C:\\Users\\va87348\\Desktop\\control.ctl", "C:\\Users\\va87348\\Desktop\\output.sql", true);
+		// new
+		// Main_Hack().getRepeatTempleate("C:\\Users\\va87348\\Desktop\\template.sql",
+		// "C:\\Users\\va87348\\Desktop\\control.ctl",
+		// "C:\\Users\\va87348\\Desktop\\output.sql", false);
 		// int a = test(2);
 		// System.out.println(a);
+		/*
+		 * int[] arr = new int[] { 1, 3, 5, 2, 4, 6, 7 }; minimumSwaps(arr);
+		 */
 
+		/*
+		 * boolean out = isValidFocusName("~`!@#$%^&*()-_+=|{}[]:;\"\\',./?");
+		 * 
+		 * System.out.println(out);
+		 */
+
+		/*
+		 * SortedLinkList<String> str = new SortedLinkList<>();
+		 * 
+		 * str.insert("c"); str.insert("a"); str.insert("b"); str.insert("3");
+		 * str.insert("4"); str.insert("1");
+		 * 
+		 * System.out.println(str);
+		 */
+
+		// test(strings);
+
+		// converDatetoString(new Date());
+		 new
+		 Main_Hack().getRepeatTempleate("C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\template.sql","C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\control.ctl","C:\\Users\\va87348\\Desktop\\Reg\\SQLRepeter\\out.sql",false);
+
+		// String data = "Bussiness Unit [BAU-NAM-US-GCB-CARDS] could not be
+		// deleted as it is a member in one or more Hierarchies, assigned
+		// [33450] alerts, [1] users, [0] reports and [0] T.Blotters.";
+		// String bu = data.split("\\]")[0].trim().split("\\[")[1].trim();
+
+		// System.out.println(900/900);
+
+		/*
+		 * List<Integer> buInternalList = new ArrayList<Integer>();
+		 * 
+		 * buInternalList.add(1); buInternalList.add(2); buInternalList.add(3);
+		 * buInternalList.add(4); buInternalList.add(5); int[] buInternalArr =
+		 * new int[buInternalList.size()];
+		 * 
+		 * for (int i = 0; i < buInternalList.size(); i++) { buInternalArr[i] =
+		 * buInternalList.get(i); }
+		 * 
+		 * for (int i = 0; i < buInternalList.size(); i++) {
+		 * System.out.println(buInternalArr[i]); }
+		 */
+		/*
+		 * StringBuilder audit = new StringBuilder();
+		 * 
+		 * audit.append("Test1" + "##@@##");
+		 * 
+		 * String[] audits = audit.toString().split("##@@##");
+		 * 
+		 * for (int i = 0; i < audits.length; i++) {
+		 * System.out.println(audits[i]); }
+		 */
+
+		/*
+		 * int[] sco = { 100, 100, 50, 40, 40, 20, 10 }; int[] alice = { 5, 25,
+		 * 50, 120 }; climbingLeaderboards(sco, alice); for (int j =
+		 * alice.length - 1; j >= 0; j--) { System.out.println(alice[j]); }
+		 */
+
+		/*
+		 * long out = repeatedString("aab", 882787);
+		 * 
+		 * System.out.println("mon :: " + 882787 % 3);
+		 * 
+		 * System.out.println("OUT  :: " + out);
+		 */
+		/*
+		 * System.out.println(System.getProperty("line.separator"));
+		 * 
+		 * String data = "sdsd " + System.getProperty("line.separator") +
+		 * "sdsdsd sd sd";
+		 * 
+		 * System.out.println(data);
+		 */
+
+		//System.out.println('j' + 'a');
+		//covertBina();
+		
+		System.out.println(convertStringtoFormtDateStr("03/18/2019"));
+
+	}
+
+	static private String convertStringtoFormtDateStr(String s)
+	{
+		 
+		DateFormat pd = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		Date d = null;
+		String convDate = null;
+		try
+		{
+			d = pd.parse(s);
+			convDate = df.format(d);
+		} catch (ParseException e)
+		{
+			 e.printStackTrace();
+
+		}
+		return convDate;
+	}
+
+	public static void covertBina()
+	{
+		int n, count = 0, a;
+		String x = "";
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter any decimal number:");
+		n = s.nextInt();
+		while (n > 0)
+		{
+			a = n % 2;
+			if (a == 1)
+			{
+				count++;
+			}
+			x = x + "" + a;
+			n = n / 2;
+		}
+		System.out.println("Binary number:" + x);
+		System.out.println("No. of 1s:" + count);
+	}
+
+	static long repeatedString(String s, long n)
+	{
+
+		int ocrOfA = ((s.length() - s.replace("a", "").length()));
+
+		long out = (n / s.length()) * ocrOfA;
+
+		s = s.substring(0, (int) (n % s.length()));
+
+		out += ((s.length() - s.replace("a", "").length()));
+
+		return out;
+
+	}
+
+	static int[] climbingLeaderboards(int[] scores, int[] alice)
+	{
+
+		scores = Arrays.stream(scores).distinct().toArray();
+		int i = scores.length - 1;
+		for (int j = 0; j < alice.length; j++)
+		{
+			int aliceScore = alice[j];
+			alice[j] = 0;
+			for (; i >= 0; i--)
+			{
+				if (scores[i] > aliceScore)
+				{
+					alice[j] = i + 2;
+					break;
+				} else if (scores[i] == aliceScore)
+				{
+					alice[j] = i + 1;
+					break;
+				}
+			}
+			if (alice[j] == 0)
+				alice[j] = i + 2;
+		}
+
+		return null;
+	}
+
+	static private String converDatetoString(Date d)
+	{
+		DateFormat df = new SimpleDateFormat("dd-MMM-yyyy"); // yyyy-MM-dd
+																// HH:mm:ss
+		String reportDate = df.format(d);
+		System.out.println("Report Date: " + reportDate);
+		return reportDate;
+	}
+
+	public static void test(String args[])
+	{
+		Scanner in = new Scanner(System.in);
+
+		// game loop
+
+		int dis = 0;
+
+		List<Integer> list = new ArrayList<Integer>();
+		int[] a =
+		{ 9, 4, 7, 6, 5, 8, 3, 2 };
+		int count = 0;
+		while (count < 9)
+		{
+			int max = 0;
+			for (int i = 0; i < 8; i++)
+			{
+				int mountainH = a[i]; // represents the height of one
+										// mountain.
+				// System.out.println(mountainH);
+				if (mountainH > max && !list.contains(mountainH))
+				{
+					max = mountainH;
+					dis = i;
+				}
+			}
+
+			list.add(max);
+			// Write an action using System.out.println()
+			// To debug: System.err.println("Debug messages...");
+
+			// The index of the mountain to fire on.
+			count++;
+			// System.out.println(list);
+			System.out.println(dis);
+		}
+	}
+
+	static private boolean isValidFocusName(String focusName)
+	{
+		if (focusName != null && focusName != "")
+		{
+			String regex = "[\\w_$&~`!%^&*|+={}:;\"\\\\?\\[\\].//(),‘\\-'\\s\\r\\t$#@\u4E00-\u9FFF\u3040-\u30ff\uac00-\ud7af]+$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(focusName);
+			return (!matcher.matches());
+		}
+
+		return false;
 	}
 
 	public boolean getRepeatTempleate(String templatepath, String controlPath, String outputPath, boolean isCompination)
@@ -61,7 +293,6 @@ public class Main_Hack implements Comparable<Main_Hack>
 			if (isCompination)
 				return processDataCompination(template, controlList, outputPath);
 			else
-
 				return processData(template, controlList, outputPath, dataSize);
 
 		} catch (FileNotFoundException e)
@@ -222,11 +453,11 @@ public class Main_Hack implements Comparable<Main_Hack>
 				Scanner scan = new Scanner(this.file);
 				while (scan.hasNext())
 				{
-					String[] strArr = scan.nextLine().split(" ");
+					String[] strArr = scan.nextLine().split("####!!");
 					if (strArr.length <= this.position)
 						dataHolder.add(null);
 					else
-						dataHolder.add(strArr[this.position]);
+						dataHolder.add(strArr[this.position].trim());
 				}
 
 			} catch (FileNotFoundException e)
@@ -250,6 +481,33 @@ public class Main_Hack implements Comparable<Main_Hack>
 
 			return (ctl.placeHolder.equals(this.placeHolder) && ctl.fileLocation.equals(this.fileLocation) && this.position == ctl.position);
 		}
+
+	}
+
+	static void swap(int[] array, int left, int right)
+	{
+		int temp = array[right];
+		array[right] = array[left];
+		array[left] = temp;
+	}
+
+	static int minimumSwaps(int[] arr)
+	{
+		int count = 0;
+		for (int i = 0; i < arr.length; i++)
+		{
+			if (!((i + 1) == arr[i]))
+			{
+				count++;
+				int tmp = 0;
+				tmp = arr[arr[i] - 1];
+				arr[arr[i] - 1] = arr[i];
+				arr[i] = tmp;
+				i = 0;
+			}
+
+		}
+		return count;
 
 	}
 
@@ -785,7 +1043,6 @@ public class Main_Hack implements Comparable<Main_Hack>
 				i++;
 			} else
 			{
-
 				j++;
 				scores[j] = scores[i];
 				i++;
@@ -1029,20 +1286,6 @@ public class Main_Hack implements Comparable<Main_Hack>
 	public String toString()
 	{
 		return super.toString();
-	}
-
-	static void generatePermutations(List<List<String>> Lists, List<String> result, int depth, String current)
-	{
-		if (depth == Lists.size())
-		{
-			result.add(current);
-			return;
-		}
-
-		for (int i = 0; i < Lists.get(depth).size(); ++i)
-		{
-			generatePermutations(Lists, result, depth + 1, current + Lists.get(depth).get(i));
-		}
 	}
 
 	public static void mainOld(String... strings) throws FileNotFoundException, IOException, CloneNotSupportedException
